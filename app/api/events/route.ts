@@ -21,10 +21,10 @@ const mockScheduledEvents = [
   },
 ];
 
-export async function GET(req: NextRequest) {
+export async function GET(_: NextRequest) {
   try {
     return NextResponse.json({ events: mockScheduledEvents }, { status: 200 });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err: unknown) {
+    return NextResponse.json({ error: err instanceof Error ? err.message : String(err) }, { status: 500 });
   }
 } 
