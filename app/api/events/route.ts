@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 const mockScheduledEvents = [
   {
@@ -21,7 +21,7 @@ const mockScheduledEvents = [
   },
 ];
 
-export async function GET(_: NextRequest) {
+export async function GET() {
   try {
     return NextResponse.json({ events: mockScheduledEvents }, { status: 200 });
   } catch (err: unknown) {

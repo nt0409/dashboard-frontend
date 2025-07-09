@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 const mockColdEmails = [
   {
@@ -19,7 +19,7 @@ const mockColdEmails = [
   },
 ];
 
-export async function GET(_: NextRequest) {
+export async function GET() {
   try {
     return NextResponse.json({ cold_emails: mockColdEmails }, { status: 200 });
   } catch (err: unknown) {

@@ -931,8 +931,8 @@ function AuthenticateTokenButton() {
       setMessage(data.error || "Authentication failed");
       setTimeout(() => setMessage(""), 3000);
     }
-  } catch (err) {
-    setMessage("Network error occurred");
+  } catch (err: unknown) {
+    setMessage(err instanceof Error ? err.message : "Network error occurred");
     setTimeout(() => setMessage(""), 3000);
   } finally {
     setLoading(false);
@@ -1058,8 +1058,8 @@ export default function DashboardPage() {
         } else {
           setErrorStats(data.error || "Failed to fetch dashboard stats");
         }
-      } catch (err: any) {
-        setErrorStats(err.message);
+      } catch (err: unknown) {
+        setErrorStats(err instanceof Error ? err.message : String(err));
       } finally {
         setLoadingStats(false);
       }
@@ -1102,11 +1102,11 @@ export default function DashboardPage() {
         const eventData = await eventRes.json();
         setScheduledEvents(eventData.events || []);
         setErrorScheduledEvents(eventRes.ok ? null : eventData.error);
-      } catch (err: any) {
-        setErrorColdEmails(err.message);
-        setErrorFollowUps(err.message);
-        setErrorTasks(err.message);
-        setErrorScheduledEvents(err.message);
+      } catch (err: unknown) {
+        setErrorColdEmails(err instanceof Error ? err.message : String(err));
+        setErrorFollowUps(err instanceof Error ? err.message : String(err));
+        setErrorTasks(err instanceof Error ? err.message : String(err));
+        setErrorScheduledEvents(err instanceof Error ? err.message : String(err));
       } finally {
         setLoadingColdEmails(false);
         setLoadingFollowUps(false);
