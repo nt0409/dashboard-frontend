@@ -156,7 +156,7 @@
 
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+// import { usePathname } from 'next/navigation';
 
 const navLinks = [
   { id: 'cold-emails', label: 'Cold Emails' },

@@ -1,6 +1,6 @@
 import React from 'react';
 
-type FollowUp = {
+export type FollowUp = {
   email: string;
   name: string;
   scheduled_followup_date: string;

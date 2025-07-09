@@ -967,6 +967,10 @@ import ColdEmailsTable from "@/components/ColdEmailsTable";
 // import InboundEmailsTable from "@/components/InboundEmailsTable";
 import ScheduledEventsTable from "@/components/ScheduledEventsTable";
 import Navbar from "@/components/Navbar";
+import { ColdEmail } from '@/components/ColdEmailsTable';
+import type { FollowUp } from '@/components/FollowUpsTable';
+import type { Task } from '@/components/TasksTable';
+import type { ScheduledEvent } from '@/components/ScheduledEventsTable';
 
 const base_url= process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 console.log("Using base URL:", base_url);
@@ -1096,22 +1100,22 @@ export default function DashboardPage() {
   }, [router]);
 
   // Cold Emails
-  const [coldEmails, setColdEmails] = useState<any[]>([]);
+  const [coldEmails, setColdEmails] = useState<ColdEmail[]>([]);
   const [loadingColdEmails, setLoadingColdEmails] = useState(false);
   const [errorColdEmails, setErrorColdEmails] = useState<string | null>(null);
 
   // Follow-ups
-  const [followUps, setFollowUps] = useState<any[]>([]);
+  const [followUps, setFollowUps] = useState<FollowUp[]>([]);
   const [loadingFollowUps, setLoadingFollowUps] = useState(false);
   const [errorFollowUps, setErrorFollowUps] = useState<string | null>(null);
 
   // Tasks
-  const [tasks, setTasks] = useState<any[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [loadingTasks, setLoadingTasks] = useState(false);
   const [errorTasks, setErrorTasks] = useState<string | null>(null);
 
   // Scheduled Events
-  const [scheduledEvents, setScheduledEvents] = useState<any[]>([]);
+  const [scheduledEvents, setScheduledEvents] = useState<ScheduledEvent[]>([]);
   const [loadingScheduledEvents, setLoadingScheduledEvents] = useState(false);
   const [errorScheduledEvents, setErrorScheduledEvents] = useState<string | null>(null);
 
@@ -1141,8 +1145,8 @@ export default function DashboardPage() {
         } else {
           setErrorStats(data.error || "Failed to fetch dashboard stats");
         }
-      } catch (err: any) {
-        setErrorStats(err.message);
+      } catch (err: unknown) {
+        setErrorStats(err instanceof Error ? err.message : String(err));
       } finally {
         setLoadingStats(false);
       }
@@ -1185,11 +1189,11 @@ export default function DashboardPage() {
         const eventData = await eventRes.json();
         setScheduledEvents(eventData.events || []);
         setErrorScheduledEvents(eventRes.ok ? null : eventData.error);
-      } catch (err: any) {
-        setErrorColdEmails(err.message);
-        setErrorFollowUps(err.message);
-        setErrorTasks(err.message);
-        setErrorScheduledEvents(err.message);
+      } catch (err: unknown) {
+        setErrorColdEmails(err instanceof Error ? err.message : String(err));
+        setErrorFollowUps(err instanceof Error ? err.message : String(err));
+        setErrorTasks(err instanceof Error ? err.message : String(err));
+        setErrorScheduledEvents(err instanceof Error ? err.message : String(err));
       } finally {
         setLoadingColdEmails(false);
         setLoadingFollowUps(false);

@@ -1,6 +1,6 @@
 import React from 'react';
 
-type ScheduledEvent = {
+export type ScheduledEvent = {
   id: string;
   event_title: string;
   invitee?: string;

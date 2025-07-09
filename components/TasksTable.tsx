@@ -1,6 +1,6 @@
 import React from 'react';
 
-type Task = {
+export type Task = {
   id: string;
   task_description: string;
   assigned_agent?: string;
