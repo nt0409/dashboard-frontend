@@ -948,6 +948,14 @@
 
 
 
+
+
+
+
+
+
+
+
 "use client";
 import React, { useEffect, useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -1006,7 +1014,7 @@ function AuthenticateTokenButton() {
       setMessage(data.error || "Authentication failed");
       setTimeout(() => setMessage(""), 3000);
     }
-  } catch (error) {
+  } catch (_error) {
     setMessage("Network error occurred");
     setTimeout(() => setMessage(""), 3000);
   } finally {
@@ -1316,3 +1324,10 @@ export default function DashboardPage() {
     </div>
   );
 }
+
+
+
+
+
+
+
