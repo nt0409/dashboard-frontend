@@ -19,7 +19,7 @@ const mockInboundEmails = [
   },
 ];
 
-export async function GET(_: NextRequest) {
+export async function GET() {
   try {
     return NextResponse.json({ inbound_emails: mockInboundEmails }, { status: 200 });
   } catch (err: unknown) {
